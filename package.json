@@ -1,0 +1,14 @@
+{
+  "name": "scrapin-occ-frontend",
+  "version": "1.0.0",
+  "description": "Frontend para el scraper de OCC",
+  "main": "index.html",
+  "scripts": {
+    "dev": "serve -s . -p 3000",
+    "build": "echo 'No build needed for static site'",
+    "start": "serve -s ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
