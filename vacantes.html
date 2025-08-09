@@ -137,12 +137,22 @@
     }
 
     async function render(filtro = 'todas') {
+      // Ocultar mapa y controles del mapa
       document.getElementById('mapContainer').style.display = 'none';
       document.getElementById('mapControls').classList.add('hidden');
-      document.getElementById('vacantesContainer').style.display = 'grid';
-      document.getElementById('equipoContainer').style.display = 'none';
+      
+      // Mostrar/ocultar secciones según el filtro
+      if (filtro === 'equipo') {
+        document.getElementById('vacantesContainer').style.display = 'none';
+        document.getElementById('equipoContainer').style.display = 'grid';
+      } else {
+        document.getElementById('vacantesContainer').style.display = 'grid';
+        document.getElementById('equipoContainer').style.display = 'none';
+      }
+      
       const contenedor = document.getElementById('vacantesContainer');
 
+      // Mostrar botón de descarga SOLO en la pestaña "todas"
       const downloadDiv = document.getElementById('downloadButtons');
       if (downloadDiv) {
         if (filtro === 'todas') {
@@ -153,8 +163,6 @@
       }
 
       if (filtro === 'equipo') {
-        document.getElementById('vacantesContainer').style.display = 'none';
-        document.getElementById('equipoContainer').style.display = 'grid';
         renderEquipo();
         return;
       }
@@ -197,7 +205,17 @@
     }
 
     async function showMapaCercaDeTi() {
+      // Ocultar todas las secciones
       document.getElementById('vacantesContainer').style.display = 'none';
+      document.getElementById('equipoContainer').style.display = 'none';
+      
+      // Ocultar botón de descargas
+      const downloadDiv = document.getElementById('downloadButtons');
+      if (downloadDiv) {
+        downloadDiv.style.display = 'none';
+      }
+      
+      // Mostrar controles del mapa
       document.getElementById('mapControls').classList.remove('hidden');
       let mapDiv = document.getElementById('mapContainer');
       mapDiv.style.display = 'block';
