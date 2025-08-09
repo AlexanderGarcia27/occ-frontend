@@ -21,23 +21,38 @@
 
       <!-- Filtros -->
       <div class="flex justify-center gap-4 mb-8">
-        <button onclick="render('todas')" class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Todas</button>
-        <button onclick="render('mayor')" class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Mayor sueldo</button>
-        <button onclick="render('menor')" class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Menor sueldo</button>
-        <button onclick="showMapaCercaDeTi()" class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Cerca de ti</button>
-        <button onclick="render('equipo')" class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Equipo</button>
+        <button onclick="render('todas')"
+          class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Todas</button>
+        <button onclick="render('mayor')"
+          class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Mayor sueldo</button>
+        <button onclick="render('menor')"
+          class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Menor sueldo</button>
+        <button onclick="showMapaCercaDeTi()"
+          class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Cerca de ti</button>
+        <button onclick="render('equipo')"
+          class="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded shadow">Equipo</button>
       </div>
 
       <!-- Controles de descarga, solo visibles en la pestaña 'todas' -->
       <div id="downloadButtons" class="flex gap-4 mb-4 items-center" style="display:none;">
         <div class="relative ml-12" id="descargarDropdownWrapper" style="padding-left: 3.5rem;">
-          <button id="descargarDropdownBtn" onclick="toggleDescargarDropdown(event)" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded shadow flex items-center gap-2" type="button">
+          <button id="descargarDropdownBtn" onclick="toggleDescargarDropdown(event)"
+            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded shadow flex items-center gap-2"
+            type="button">
             <i class="bi bi-download"></i> Descargar <i class="bi bi-caret-down-fill ml-1"></i>
           </button>
-          <div id="descargarDropdown" class="absolute left-0 mt-2 flex flex-col gap-2 bg-white rounded-lg shadow-lg p-2 z-20 min-w-[160px]" style="display:none;">
-            <a id="downloadJson" href="#" class="flex items-center gap-2 px-4 py-2 rounded hover:bg-cyan-100 text-cyan-700 font-semibold" title="Descargar JSON"><i class="bi bi-filetype-json"></i> JSON</a>
-            <a id="downloadCsv" href="#" class="flex items-center gap-2 px-4 py-2 rounded hover:bg-cyan-100 text-cyan-700 font-semibold" title="Descargar CSV"><i class="bi bi-filetype-csv"></i> CSV</a>
-            <a id="downloadExcel" href="#" class="flex items-center gap-2 px-4 py-2 rounded hover:bg-cyan-100 text-cyan-700 font-semibold" title="Descargar Excel"><i class="bi bi-file-earmark-excel-fill"></i> Excel</a>
+          <div id="descargarDropdown"
+            class="absolute left-0 mt-2 flex flex-col gap-2 bg-white rounded-lg shadow-lg p-2 z-20 min-w-[160px]"
+            style="display:none;">
+            <a id="downloadJson" href="#"
+              class="flex items-center gap-2 px-4 py-2 rounded hover:bg-cyan-100 text-cyan-700 font-semibold"
+              title="Descargar JSON"><i class="bi bi-filetype-json"></i> JSON</a>
+            <a id="downloadCsv" href="#"
+              class="flex items-center gap-2 px-4 py-2 rounded hover:bg-cyan-100 text-cyan-700 font-semibold"
+              title="Descargar CSV"><i class="bi bi-filetype-csv"></i> CSV</a>
+            <a id="downloadExcel" href="#"
+              class="flex items-center gap-2 px-4 py-2 rounded hover:bg-cyan-100 text-cyan-700 font-semibold"
+              title="Descargar Excel"><i class="bi bi-file-earmark-excel-fill"></i> Excel</a>
           </div>
         </div>
       </div>
@@ -48,19 +63,14 @@
           <div id="radiusControls" class="flex items-center gap-4 flex-1">
             <label class="text-sm font-medium text-gray-700 whitespace-nowrap">Radio de búsqueda:</label>
             <div class="flex-1 flex items-center gap-2">
-              <input 
-                type="range" 
-                id="radiusInput" 
-                value="200" 
-                min="1" 
-                max="1000" 
+              <input type="range" id="radiusInput" value="200" min="1" max="1000"
                 class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                oninput="updateRadius()"
-              >
+                oninput="updateRadius()">
               <span id="radiusValue" class="text-sm font-bold text-cyan-600 min-w-[3rem] text-center">200 km</span>
             </div>
           </div>
-          <button id="radiusToggle" onclick="toggleRadius()" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded shadow text-sm whitespace-nowrap">
+          <button id="radiusToggle" onclick="toggleRadius()"
+            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded shadow text-sm whitespace-nowrap">
             Activado
           </button>
         </div>
@@ -79,9 +89,9 @@
 
   <script>
     // Configuración del API
-    const API_BASE_URL = window.location.hostname === 'localhost' 
-      ? 'http://localhost:3000/api'
-      : 'https://your-backend-render-app.onrender.com/api'; // Reemplazar con tu URL de Render
+    const API_BASE_URL = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://scraping-occ.onrender.com'; // Reemplazar con tu URL de Render
 
     let todasVacantes = [];
     let radiusFilterActive = true;
@@ -97,7 +107,7 @@
       document.getElementById('downloadCsv').href = `${API_BASE_URL}/download/resultados.csv`;
       document.getElementById('downloadExcel').href = `${API_BASE_URL}/download/resultados.xlsx`;
     });
-  
+
     async function getVacantes() {
       const res = await fetch(`${API_BASE_URL}/resultados.json`);
       const data = await res.json();
@@ -109,13 +119,13 @@
       const data = await res.json();
       return data;
     }
-  
+
     function parseSueldo(sueldo) {
       if (!sueldo) return 0;
       const match = sueldo.replace(/,/g, '').match(/\d+/);
       return match ? parseInt(match[0], 10) : 0;
     }
-  
+
     function createCard(v) {
       return `<div class="bg-white rounded-lg shadow p-5 w-full max-w-xs mx-auto flex flex-col gap-2 border border-cyan-100">
         <div class="font-bold text-lg">${v.nombreVacante || 'Sin título'}</div>
@@ -125,14 +135,14 @@
         <div class="text-cyan-700 font-bold text-lg mt-1">${v.sueldo}</div>
       </div>`;
     }
-  
+
     async function render(filtro = 'todas') {
       document.getElementById('mapContainer').style.display = 'none';
       document.getElementById('mapControls').classList.add('hidden');
       document.getElementById('vacantesContainer').style.display = 'grid';
       document.getElementById('equipoContainer').style.display = 'none';
       const contenedor = document.getElementById('vacantesContainer');
-      
+
       const downloadDiv = document.getElementById('downloadButtons');
       if (downloadDiv) {
         if (filtro === 'todas') {
@@ -141,44 +151,44 @@
           downloadDiv.style.display = 'none';
         }
       }
-      
+
       if (filtro === 'equipo') {
         document.getElementById('vacantesContainer').style.display = 'none';
         document.getElementById('equipoContainer').style.display = 'grid';
         renderEquipo();
         return;
       }
-  
+
       if (todasVacantes.length === 0) {
         todasVacantes = await getVacantes();
       }
-  
+
       if (!todasVacantes.length) {
         contenedor.innerHTML = '<div class="text-gray-500">No hay vacantes disponibles.</div>';
         return;
       }
-  
+
       let vacantes = [];
-      
+
       if (filtro === 'todas') {
         const allData = await getTodasVacantes();
         vacantes = allData;
       } else {
         vacantes = [...todasVacantes];
         vacantes.sort((a, b) => parseSueldo(b.sueldo) - parseSueldo(a.sueldo));
-        
+
         const n = getCantidad(vacantes.length);
-        
+
         if (filtro === 'mayor') {
           vacantes = vacantes.slice(0, n);
         } else if (filtro === 'menor') {
           vacantes = vacantes.reverse().slice(0, n);
         }
       }
-  
+
       contenedor.innerHTML = vacantes.map(createCard).join('');
     }
-  
+
     function getCantidad(total) {
       if (total > 30) return 10;
       if (total >= 20) return 8;
@@ -203,51 +213,51 @@
         userLng = pos.coords.longitude;
 
         allGeocodedVacantes = [];
-        
+
         const defaultLat = 23.6345;
         const defaultLng = -102.5528;
-        
+
         const todasVacantesCompletas = await getTodasVacantes();
         console.log(`📊 TOTAL DE VACANTES ENCONTRADAS: ${todasVacantesCompletas.length}`);
-        
+
         for (const v of todasVacantesCompletas) {
           try {
             if (v.ubicacion && v.ubicacion.trim() !== '') {
               let ubicacionLimpia = v.ubicacion.trim();
               ubicacionLimpia = ubicacionLimpia.replace(/,,/g, ',').replace(/\s+/g, ' ');
-              
+
               let ubicacionExpandida = expandirAbreviaciones(ubicacionLimpia);
-              
+
               const searchVariations = [
                 ubicacionExpandida + ', México',
                 ubicacionExpandida
               ];
-              
+
               const uniqueSearchTerms = [...new Set(searchVariations)];
-              
+
               let found = false;
               let bestResult = null;
-              
+
               for (const searchTerm of uniqueSearchTerms) {
                 try {
                   const url = `${API_BASE_URL}/geocode?q=${encodeURIComponent(searchTerm)}`;
                   const res = await fetch(url);
                   const data = await res.json();
-                  
+
                   if (data && data.length > 0) {
                     const lat = parseFloat(data[0].lat);
                     const lng = parseFloat(data[0].lon);
-                    
+
                     if (lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
                       const R = 6371;
                       const dLat = (lat - userLat) * Math.PI / 180;
                       const dLon = (lng - userLng) * Math.PI / 180;
                       const a = Math.sin(dLat / 2) ** 2 +
-                                Math.cos(userLat * Math.PI / 180) * Math.cos(lat * Math.PI / 180) *
-                                Math.sin(dLon / 2) ** 2;
+                        Math.cos(userLat * Math.PI / 180) * Math.cos(lat * Math.PI / 180) *
+                        Math.sin(dLon / 2) ** 2;
                       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
                       const dist = R * c;
-                      
+
                       bestResult = { ...v, lat, lng, dist, searchTerm };
                       found = true;
                       break;
@@ -257,7 +267,7 @@
                   console.log(`Error en búsqueda: "${searchTerm}"`, error);
                 }
               }
-              
+
               if (found && bestResult) {
                 allGeocodedVacantes.push(bestResult);
               } else {
@@ -265,8 +275,8 @@
                 const dLat = (defaultLat - userLat) * Math.PI / 180;
                 const dLon = (defaultLng - userLng) * Math.PI / 180;
                 const a = Math.sin(dLat / 2) ** 2 +
-                          Math.cos(userLat * Math.PI / 180) * Math.cos(defaultLat * Math.PI / 180) *
-                          Math.sin(dLon / 2) ** 2;
+                  Math.cos(userLat * Math.PI / 180) * Math.cos(defaultLat * Math.PI / 180) *
+                  Math.sin(dLon / 2) ** 2;
                 const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
                 const dist = R * c;
                 allGeocodedVacantes.push({ ...v, lat: defaultLat, lng: defaultLng, dist, searchTerm: 'ubicación por defecto' });
@@ -276,8 +286,8 @@
               const dLat = (defaultLat - userLat) * Math.PI / 180;
               const dLon = (defaultLng - userLng) * Math.PI / 180;
               const a = Math.sin(dLat / 2) ** 2 +
-                        Math.cos(userLat * Math.PI / 180) * Math.cos(defaultLat * Math.PI / 180) *
-                        Math.sin(dLon / 2) ** 2;
+                Math.cos(userLat * Math.PI / 180) * Math.cos(defaultLat * Math.PI / 180) *
+                Math.sin(dLon / 2) ** 2;
               const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
               const dist = R * c;
               allGeocodedVacantes.push({ ...v, lat: defaultLat, lng: defaultLng, dist });
@@ -287,8 +297,8 @@
             const dLat = (defaultLat - userLat) * Math.PI / 180;
             const dLon = (defaultLng - userLng) * Math.PI / 180;
             const a = Math.sin(dLat / 2) ** 2 +
-                      Math.cos(userLat * Math.PI / 180) * Math.cos(defaultLat * Math.PI / 180) *
-                      Math.sin(dLon / 2) ** 2;
+              Math.cos(userLat * Math.PI / 180) * Math.cos(defaultLat * Math.PI / 180) *
+              Math.sin(dLon / 2) ** 2;
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             const dist = R * c;
             allGeocodedVacantes.push({ ...v, lat: defaultLat, lng: defaultLng, dist });
@@ -296,16 +306,16 @@
         }
 
         mapDiv.innerHTML = '<div id="map" style="width:100%;height:500px;"></div>';
-        
+
         currentMap = L.map('map').setView([userLat, userLng], 10);
-        
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '© OpenStreetMap contributors',
           maxZoom: 19
         }).addTo(currentMap);
 
         updateMapMarkers();
-        
+
         if (allGeocodedVacantes.length === 0) {
           L.popup()
             .setLatLng([userLat, userLng])
@@ -321,7 +331,7 @@
       const radiusInput = document.getElementById('radiusInput');
       const radiusValue = document.getElementById('radiusValue');
       const newRadius = parseInt(radiusInput.value);
-      
+
       if (newRadius >= 1 && newRadius <= 1000) {
         currentRadius = newRadius;
         radiusValue.textContent = `${newRadius} km`;
@@ -335,7 +345,7 @@
       const radiusControls = document.getElementById('radiusControls');
       const radiusInput = document.getElementById('radiusInput');
       const radiusValue = document.getElementById('radiusValue');
-      
+
       if (radiusFilterActive) {
         toggleBtn.textContent = 'Activado';
         toggleBtn.className = 'px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded shadow text-sm';
@@ -357,19 +367,19 @@
         radiusValue.classList.add('text-gray-400');
         radiusValue.classList.remove('text-cyan-600');
       }
-      
+
       updateMapMarkers();
     }
 
     function updateMapMarkers() {
       if (!currentMap || !userLat || !userLng) return;
-      
+
       currentMap.eachLayer((layer) => {
         if (layer instanceof L.Marker || layer instanceof L.Circle) {
           currentMap.removeLayer(layer);
         }
       });
-      
+
       const redIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
@@ -378,10 +388,10 @@
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
       });
-      
+
       L.marker([userLat, userLng], { icon: redIcon }).addTo(currentMap)
         .bindPopup('Tú estás aquí').openPopup();
-      
+
       if (radiusFilterActive) {
         L.circle([userLat, userLng], {
           color: 'red',
@@ -390,12 +400,12 @@
           radius: currentRadius * 1000
         }).addTo(currentMap);
       }
-      
+
       let vacantesAMostrar = allGeocodedVacantes;
       if (radiusFilterActive) {
         vacantesAMostrar = allGeocodedVacantes.filter(v => v.dist <= currentRadius);
       }
-      
+
       const blueIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
@@ -404,7 +414,7 @@
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
       });
-      
+
       if (vacantesAMostrar.length > 0) {
         vacantesAMostrar.forEach(v => {
           const popup = `
@@ -421,9 +431,9 @@
             .bindPopup(popup);
         });
       }
-      
+
       document.getElementById('jobsCount').textContent = vacantesAMostrar.length;
-      
+
       const filterStatus = document.getElementById('filterStatus');
       if (radiusFilterActive) {
         filterStatus.textContent = `(dentro de ${currentRadius}km)`;
@@ -469,12 +479,12 @@
 
     function expandirAbreviaciones(ubicacion) {
       let ubicacionExpandida = ubicacion;
-      
+
       for (const [abrev, nombreCompleto] of Object.entries(abreviacionesEstados)) {
         const regex = new RegExp(`\\b${abrev.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
         ubicacionExpandida = ubicacionExpandida.replace(regex, nombreCompleto);
       }
-      
+
       return ubicacionExpandida;
     }
 
@@ -542,7 +552,7 @@
         document.removeEventListener('click', closeDescargarDropdownOnClickOutside);
       }
     }
-    
+
     function closeDescargarDropdownOnClickOutside(e) {
       const wrapper = document.getElementById('descargarDropdownWrapper');
       if (!wrapper.contains(e.target)) {
@@ -555,7 +565,7 @@
       window.location.href = 'index.html';
       setTimeout(() => location.reload(), 200);
     }
-  
+
     // Estilos CSS
     const style = document.createElement('style');
     style.innerHTML = `
@@ -612,14 +622,14 @@
       }
     `;
     document.head.appendChild(style);
-  
+
     render();
   </script>
 
   <footer class="w-full bg-gray-200 text-center py-4 mt-8 text-gray-600 font-medium">
     datos obtenidos solo con fines educativos
   </footer>
-  
+
 </body>
 
 </html>

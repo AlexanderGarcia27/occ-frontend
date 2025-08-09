@@ -1,40 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de Scraping</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 min-h-screen">
     <div class="flex flex-col items-center justify-center min-h-screen px-4">
         <div class="w-full max-w-2xl bg-white rounded-lg shadow p-8">
             <h1 class="mb-8 text-2xl md:text-4xl font-bold text-gray-800 text-center">Buscador de Vacantes</h1>
-            
+
             <form id="searchForm" class="flex flex-col sm:flex-row gap-4 mb-6">
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    placeholder="Buscar vacante" 
-                    required
-                    class="flex-1 px-4 py-3 text-lg border border-gray-300 rounded focus:border-blue-500 focus:outline-none"
-                >
-                <button 
-                    type="submit" 
-                    id="searchBtn"
-                    class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded cursor-pointer transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
+                <input type="text" id="searchInput" placeholder="Buscar vacante" required
+                    class="flex-1 px-4 py-3 text-lg border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                <button type="submit" id="searchBtn"
+                    class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded cursor-pointer transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
                     Buscar
                 </button>
             </form>
-            
+
             <div id="status" class="text-center font-semibold text-cyan-700 my-4"></div>
-            
-            <button 
-                id="verVacantesBtn" 
-                onclick="window.location='vacantes.html'"
-                class="hidden mt-8 px-8 py-3 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded cursor-pointer transition-colors"
-            >
+
+            <button id="verVacantesBtn" onclick="window.location='vacantes.html'"
+                class="hidden mt-8 px-8 py-3 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded cursor-pointer transition-colors">
                 Ver vacantes
             </button>
         </div>
@@ -42,9 +33,9 @@
 
     <script>
         // Configuración del backend
-        const API_BASE_URL = window.location.hostname === 'localhost' 
-            ? 'http://localhost:3000/api'
-            : 'https://your-backend-render-app.onrender.com/api'; // Reemplazar con tu URL de Render
+        const API_BASE_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3000'
+            : 'https://scraping-occ.onrender.com'; // Reemplazar con tu URL de Render
 
         const searchForm = document.getElementById('searchForm');
         const searchInput = document.getElementById('searchInput');
@@ -55,7 +46,7 @@
         searchForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const searchTerm = searchInput.value.trim();
-            
+
             if (!searchTerm) {
                 status.textContent = 'Por favor ingresa un término de búsqueda';
                 return;
@@ -68,19 +59,19 @@
             try {
                 const response = await fetch(`${API_BASE_URL}/search`, {
                     method: 'POST',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({ searchTerm })
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
-                
+
                 if (data.success) {
                     status.textContent = data.message;
                     verVacantesBtn.classList.remove('hidden');
@@ -110,4 +101,5 @@
         });
     </script>
 </body>
+
 </html>
