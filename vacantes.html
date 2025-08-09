@@ -88,6 +88,26 @@
   </div>
 
   <script>
+    // Verificar si se puede acceder a esta página
+    function checkAccess() {
+      // Verificar si hay datos de búsqueda disponibles
+      const hasLocalData = localStorage.getItem('searchCompleted') === 'true';
+      const hasSessionData = sessionStorage.getItem('searchCompleted') === 'true';
+      
+      // Si no hay datos de búsqueda, redirigir al inicio
+      if (!hasLocalData && !hasSessionData) {
+        alert('Primero debes realizar una búsqueda');
+        window.location.href = 'index.html';
+        return false;
+      }
+      return true;
+    }
+
+    // Verificar acceso al cargar la página
+    if (!checkAccess()) {
+      throw new Error('Acceso no autorizado');
+    }
+
     // Configuración del API
     const API_BASE_URL = window.location.hostname === 'localhost'
       ? 'http://localhost:3000'
@@ -629,8 +649,16 @@
     }
 
     function goBack() {
+      // Limpiar datos de la sesión
+      todasVacantes = [];
+      allGeocodedVacantes = [];
+      
+      // Limpiar localStorage si hay datos guardados
+      localStorage.removeItem('vacantesData');
+      localStorage.removeItem('searchCompleted');
+      
+      // Redirigir a la página principal
       window.location.href = 'index.html';
-      setTimeout(() => location.reload(), 200);
     }
 
     // Estilos CSS

@@ -74,6 +74,11 @@
 
                 if (data.success) {
                     status.textContent = data.message;
+                    
+                    // Marcar que se completó una búsqueda exitosa
+                    localStorage.setItem('searchCompleted', 'true');
+                    sessionStorage.setItem('searchCompleted', 'true');
+                    
                     verVacantesBtn.classList.remove('hidden');
                 } else {
                     status.textContent = data.error || 'Error al buscar vacantes';
@@ -86,8 +91,13 @@
             }
         });
 
-        // Test de conectividad al cargar la página
+        // Limpiar datos al cargar la página inicial
         window.addEventListener('load', async () => {
+            // Limpiar indicadores de búsqueda completada al cargar index
+            localStorage.removeItem('searchCompleted');
+            sessionStorage.removeItem('searchCompleted');
+            
+            // Test de conectividad
             try {
                 const response = await fetch(`${API_BASE_URL}/health`);
                 if (response.ok) {
